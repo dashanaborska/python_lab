@@ -82,10 +82,13 @@ python -m pytest
 ## Project structure
 
 ```text
-Lab_01/
+python_lab1/
 ├── .gitignore
 ├── pyproject.toml
 ├── README.md
+├── report/
+│   ├── Lab_01_Naborska.docx
+│   └── Lab_01_Naborska.pdf
 ├── src/
 │   └── sport_results/
 │       ├── __init__.py
@@ -105,6 +108,10 @@ Lab_01/
 - `exceptions.py` — власні винятки;
 - `config.py` — конфігураційні константи;
 - `main.py` — точка входу та консольне меню.
+
+## Report
+
+Звіт до лабораторної роботи знаходиться в каталозі `report/`.
 
 ## Author
 
