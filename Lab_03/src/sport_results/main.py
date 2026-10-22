@@ -66,7 +66,8 @@ def show_stream(path: Path) -> None:
           f"invalid: {stats.invalid:,}")
     for reason, count in sorted(stats.errors.items()):
         print(f"  {reason:24}{count:>6,}")
-    print("Записів на кожному stage:", log.counts)
+    print("Записів на кожному stage:")
+    print("  " + " -> ".join(f"{k} {v:,}" for k, v in log.counts.items()))
     print(f"Streaming average: {sum_results / total:.2f}")
     if best is not None:
         print("Найкращий результат:", line(best))
