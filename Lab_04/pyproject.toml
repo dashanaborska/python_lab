@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sport-results"
+version = "0.4.0"
+description = "Typed object model for sport results accounting"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Daria Naborska" }]
+
+[project.optional-dependencies]
+dev = ["mypy>=1.10", "pytest>=8"]
+
+[project.scripts]
+sport-results = "sport_results.main:main"
+sport-results-design = "sport_results.design:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+sport_results = ["py.typed"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_ignores = true
+warn_return_any = true
+mypy_path = "src"
