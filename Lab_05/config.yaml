@@ -1,0 +1,35 @@
+schema_version: 1
+
+input:
+  path: data/results.csv
+
+output:
+  path: output/results.json
+  errors_path: output/errors.csv
+  summary_path: output/summary.json
+  backup: true
+
+processing:
+  mode: tolerant
+  progress_every: 10
+  result:
+    min: 0
+    max: 100
+  sports:
+    - Плавання
+    - Бокс
+    - Легка атлетика
+    - Велоспорт
+  categories:
+    - МСМК
+    - МС
+    - КМС
+    - I розряд
+    - II розряд
+    - III розряд
+
+logging:
+  level: INFO
+  path: logs/application.log
+  max_bytes: 1048576
+  backup_count: 3

@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sport-results"
+version = "0.5.0"
+description = "Reliable import and export of sport results"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Daria Naborska" }]
+dependencies = ["PyYAML>=6.0"]
+
+[project.optional-dependencies]
+dev = ["mypy>=1.10", "pytest>=8", "types-PyYAML"]
+
+[project.scripts]
+sport-results = "sport_results.main:main"
+sport-results-experiment = "sport_results.experiments:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+mypy_path = "src"
