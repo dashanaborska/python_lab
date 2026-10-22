@@ -30,7 +30,7 @@ def parse_args(argv: Sequence[str] | None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def print_stats(service: ImportService) -> None:
+def print_stats(service: ImportService, success: bool = True) -> None:
     stats = service.stats
     config = service.config
     print(f"Режим:        {config.processing.mode}")
@@ -40,9 +40,12 @@ def print_stats(service: ImportService) -> None:
     print(f"Exported:     {stats.exported}")
     for field, count in sorted(stats.by_field.items()):
         print(f"  invalid {field:10}{count}")
-    print(f"JSON export:  {config.output.path.name}")
-    print(f"Error report: {config.output.errors_path.name}")
-    print(f"Summary:      {config.output.summary_path.name}")
+    if success:
+        print(f"JSON export:  {config.output.path}")
+        print(f"Error report: {config.output.errors_path}")
+        print(f"Summary:      {config.output.summary_path}")
+    else:
+        print("Output не змінено (atomic write скасовано)")
     print(f"Log:          {config.logging.path}")
 
 
@@ -63,7 +66,7 @@ def run(argv: Sequence[str] | None = None) -> int:
         service.run()
     except DataError as error:
         logger.critical("Імпорт не виконано: %s", error)
-        print_stats(service)
+        print_stats(service, success=False)
         return EXIT_DATA
     except ApplicationError as error:
         logger.exception("Помилка застосунку: %s", error)

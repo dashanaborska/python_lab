@@ -3,7 +3,7 @@ from logging.handlers import RotatingFileHandler
 
 from sport_results.config import LoggingConfig
 
-FORMAT = "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
+FORMAT = "%(asctime)s %(levelname)-8s %(module)s: %(message)s"
 
 
 def setup_logging(config: LoggingConfig, console: bool = True) -> None:

@@ -67,7 +67,7 @@ def strict_vs_tolerant() -> None:
             finish = f"stop, рядок {line}"
         stats = service.stats
         exported = stats.exported if config.output.path.exists() else 0
-        invalid = stats.invalid if mode == "tolerant" else 1
+        invalid = stats.invalid
         for key, value in zip(
             rows,
             (stats.total, stats.valid, invalid, exported, finish),

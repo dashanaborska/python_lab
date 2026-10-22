@@ -43,12 +43,12 @@ class ImportService:
         row: dict[str, str],
     ) -> None:
         field = error.field or "record"
+        self.stats.register_invalid(field)
         if self.config.processing.strict:
             logger.error("Strict mode: %s", error)
             raise DataImportError(
                 f"Імпорт зупинено у strict mode ({error})"
             ) from error
-        self.stats.register_invalid(field)
         self.errors.append(
             InvalidRecord(
                 error.line_number or 0, field, error.message,
@@ -71,7 +71,11 @@ class ImportService:
         )
         write_errors(self.errors, config.output.errors_path)
         write_summary(self.summary(), config.output.summary_path)
-        logger.info("Завершено: %s", self.stats.to_dict())
+        stats = self.stats
+        logger.info(
+            "Завершено: total=%d, valid=%d, invalid=%d, exported=%d",
+            stats.total, stats.valid, stats.invalid, stats.exported,
+        )
         return self.stats
 
     def summary(self) -> dict[str, object]:
