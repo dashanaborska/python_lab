@@ -1,0 +1,17 @@
+services:
+  api:
+    build: .
+    image: sport-results:1.0.0
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      APP_ENV: production
+      DATABASE_URL: sqlite:////data/sport_results.db
+    volumes:
+      - sport-data:/data
+    restart: unless-stopped
+
+volumes:
+  sport-data:
