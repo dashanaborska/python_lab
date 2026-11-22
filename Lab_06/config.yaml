@@ -1,0 +1,10 @@
+rules:
+  min_score: 0
+  max_score: 100
+  ranking: best
+disciplines:
+  - Плавання
+  - Бокс
+  - Легка атлетика
+  - Велоспорт
+notify_threshold: 90

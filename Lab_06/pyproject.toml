@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sport-results"
+version = "0.6.0"
+description = "Sport results accounting with automated test suite"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Daria Naborska" }]
+dependencies = ["PyYAML>=6.0"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-cov>=5",
+    "hypothesis>=6",
+    "mypy>=1.10",
+    "types-PyYAML",
+]
+
+[project.scripts]
+sport-results = "sport_results.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-markers"]
+markers = [
+    "integration: integration tests with real files or database",
+    "slow: tests that take noticeably longer",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["sport_results"]
+omit = ["*/main.py"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+fail_under = 90
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+mypy_path = "src"
